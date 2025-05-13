@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link href="./output.css" rel="stylesheet">
+
+</head>
+<body>
+    <nav id="department" class="bg-black text-white px-4 py-2">
+    <div class="relative inline-block">
+        <!-- Dropdown Trigger -->
+        <button id="department-dropdown-btn" class="text-white font-semibold px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-700">
+            Departments
+        </button>
+
+        <!-- Dropdown Menu -->
+        <ul id="department-dropdown" class="hidden absolute bg-white text-black mt-2 rounded-lg shadow-lg w-40">
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="HR">HR</li>
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="IT">IT</li>
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Finance">Finance</li>
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Sales">Sales</li>
+        </ul>
+    </div>
+</nav>
+
+    <div>
+        <h1 class="text-3xl font-bold my-6 text-center">Task Management System</h1>
+
+        <!-- Task Form -->
+        <section id="task-creation" >
+            <form id="task-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4" >
+                <input type="text" placeholder="Task Title" id="task-title"  required />
+                <textarea placeholder="Task Description" id="task-desc"></textarea>
+                <input type="date" id="due-date" required />
+                <select id="priority" required>
+                    <option value="" disabled selected>Select Priority</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <select id="project" required>
+                    <option value="" disabled selected>Select Project</option>
+                    <option value="development">Development</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                </select>
+                <select id="task-department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="hr">HR</option>
+                    <option value="it">IT</option>
+                    <option value="finance">Finance</option>
+                    <option value="sales">Sales</option>
+                </select>
+                <select id="assignee" required>
+                    <option value="" disabled selected>Assign To</option>
+                    <option value="User 1">User 1</option>
+                    <option value="User 2">User 2</option>
+                    <option value="User 3">User 3</option>
+                </select>
+                <button id="submit-btn" type="submit" class="bg-blue-500 px-4 py-2 text-white font-semi-bold hover:bg-blue-700 rounded-lg transition">Add Task</button>
+            </form>
+        </section>
+
+        <!-- Task List -->
+        <section id="task-list" class="p-6 bg-gray-100 rounded-lg shadow-md mt-6">
+            <h2 class="font-bold text-2xl mb-4 text-center text-gray-800">Task List</h2>
+            <div id="task-container" class="flex jutify-center"></div>
+        </section>
+    </div>
+
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
