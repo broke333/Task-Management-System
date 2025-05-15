@@ -15,25 +15,22 @@ dropdownBtn.addEventListener("click", () => {
 
 // Filter tasks based on department
 dropdownMenu.addEventListener("click", (event) => {
-    if(event.target && event.target.tagName === "LI") {
+    if (event.target && event.target.tagName === "LI") {
         const selectedDepartment = event.target.getAttribute("data-department");
         const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        const filteredTasks = storedTasks.filter(task => 
-            task.department.toLowerCase() === selectedDepartment.toLowerCase());
+        const filteredTasks = storedTasks.filter(task =>
+            task.department.toLowerCase() === selectedDepartment.toLowerCase()
+        );
 
-        if (filteredTasks.length === 0) {
-            taskContainer.innerHTML = "No tasks for this department.";
-        } else {
-            taskContainer.innerHTML = "";
-            filteredTasks.forEach(task => {
-                const taskElement = createTaskElement(task);
-                taskContainer.appendChild(taskElement);
-            });
-        }
+        // Save filtered tasks to localStorage for the new page
+        localStorage.setItem("filteredTasks", JSON.stringify(filteredTasks));
+        console.log("Filtered Tasks:", filteredTasks);
 
-        dropdownMenu.classList.add("hidden");
+        // Navigate to the new page with the department name as a query parameter
+        window.location.href = `tasks.html?department=${encodeURIComponent(selectedDepartment)}`;
     }
 });
+
 
 // Save tasks to local storage
 function saveTasksToLocalStorage() {
@@ -45,8 +42,8 @@ function createTaskElement(task) {
     const taskElement = document.createElement("div");
     taskElement.className = "task-item";
     taskElement.innerHTML = `
-        <h3>${task.title}</h3>
-        <p>${task.description}</p>
+        <h3>${task.title.trim()}</h3>
+        <p>${task.description.trim()}</p>
         <ul>
             <li>Due Date: ${task.dueDate}</li>
             <li>Priority: ${task.priority}</li>
@@ -62,6 +59,7 @@ function createTaskElement(task) {
 
 // Render tasks
 function renderTasks() {
+    
     taskContainer.innerHTML = ""; // Clear the container
 
     if (tasks.length === 0) {
@@ -97,8 +95,8 @@ function renderTasks() {
         const row = document.createElement("tr");
 
         row.innerHTML = `
-            <td class="border border-gray-300 px-4 py-2">${task.title}</td>
-            <td class="border border-gray-300 px-4 py-2">${task.description}</td>
+            <td class="border border-gray-300 px-4 py-2">${task.title.trim()}</td>
+            <td class="border border-gray-300 px-4 py-2">${task.description.trim()}</td>
             <td class="border border-gray-300 px-4 py-2">${task.dueDate}</td>
             <td class="border border-gray-300 px-4 py-2">${task.priority}</td>
             <td class="border border-gray-300 px-4 py-2">${task.project}</td>
@@ -135,17 +133,29 @@ function renderTasks() {
 // Handle form submission (new task)
 function handleFormSubmit(event) {
     event.preventDefault();
+    const title = document.getElementById("task-title").value.trim();
+    const description = document.getElementById("task-desc").value.trim();
 
+    if (title === "" || description === "") {
+        alert("Title and Description cannot be empty or whitespace only.");
+        return;
+    }
     const task = {
         taskId: Date.now(),
-        title: document.getElementById("task-title").value.trim(),
-        description: document.getElementById("task-desc").value.trim(),
+        title,
+        description,
         dueDate: document.getElementById("due-date").value,
         priority: document.getElementById("priority").value,
         project: document.getElementById("project").value,
         department: document.getElementById("task-department").value,
         assignee: document.getElementById("assignee").value.trim(),
     };
+     if (
+        Object.values(task).some((value) => value === "")
+    ) {
+        alert("Please fill in all fields without whitespace-only values.");
+        return;
+    }
 
     if (
         !task.title ||
@@ -212,7 +222,13 @@ function handleUpdateSubmit(event) {
         console.error(`Task with ID ${currentlyEditingTaskId} not found.`);
         return;
     }
-    
+     const title = document.getElementById("task-title").value.trim();
+    const description = document.getElementById("task-desc").value.trim();
+
+    if (title === "" || description === "") {
+        alert("Title and Description cannot be empty or whitespace only.");
+        return;
+    }
     // Create the updated task object
     const updatedTask = {
         taskId: Number(currentlyEditingTaskId), // Keep the same ID
@@ -224,7 +240,12 @@ function handleUpdateSubmit(event) {
         department: document.getElementById("task-department").value,
         assignee: document.getElementById("assignee").value.trim(),
     };
-    
+    if (
+        Object.values(updatedTask).some((value) => value === "")
+    ) {
+        alert("Please fill in all fields without whitespace-only values.");
+        return;
+    }
     // Validate all fields are filled
     if (
         !updatedTask.title ||
