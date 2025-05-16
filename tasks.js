@@ -14,7 +14,6 @@ function renderFilteredTasks() {
     task => task.department.toLowerCase() === (department || "").toLowerCase()
 );
 // filepath: c:\Users\HP\Desktop\Task_Management_System\tasks.js
-    // const filteredTasks = allTasks.filter(task => task.department === department);
 
     taskContainer.innerHTML = ""; // Clear container
 
@@ -41,8 +40,10 @@ function renderFilteredTasks() {
     table.appendChild(thead);
 
     const tbody = document.createElement("tbody");
-    filteredTasks.forEach((task) => {
+    filteredTasks.forEach((task,idx) => {
         const row = document.createElement("tr");
+        row.className = idx % 2 === 0 ? "bg-white hover:bg-blue-50 transition" : "bg-gray-50 hover:bg-blue-50 transition";
+
         row.innerHTML = `
             <td class="border border-gray-300 px-4 py-2">${task.title}</td>
             <td class="border border-gray-300 px-4 py-2">${task.description}</td>

@@ -5,72 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management System</title>
     <link href="./output.css" rel="stylesheet">
-
 </head>
-<body>
-    <nav id="department" class="bg-black text-white px-4 py-2">
-    <div class="relative inline-block">
-        <!-- Dropdown Trigger -->
-        <button id="department-dropdown-btn" class="text-white font-semibold px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-700">
-            Departments
-        </button>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black text-white px-4 py-2">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+                                    <h1 class="text-5xl font-bold text-center tracking-wide">Task Management System</h1>
 
-        <!-- Dropdown Menu -->
-        <ul id="department-dropdown" class="hidden absolute bg-white text-black mt-2 rounded-lg shadow-lg w-40">
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="HR">HR</li>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="IT">IT</li>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Finance">Finance</li>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Sales">Sales</li>
-        </ul>
-    </div>
-</nav>
+            <div class="relative">
+                <button id="department-dropdown-btn" class="text-white font-semibold px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-700 transition">
+                    Departments
+                </button>
+                <ul id="department-dropdown" class="hidden absolute right-0 bg-white text-black mt-2 rounded-lg shadow-lg w-40 z-10">
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="HR">HR</li>
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="IT">IT</li>
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Finance">Finance</li>
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Sales">Sales</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div>
-        <h1 class="text-3xl font-bold my-6 text-center">Task Management System</h1>
+    <main class="max-w-5xl mx-auto py-8 px-2">
+        <!-- Task Form Card -->
+        <section id="task-creation" class="mb-8">
 
-        <!-- Task Form -->
-        <section id="task-creation" >
-            <form id="task-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4" >
-                <input type="text" placeholder="Task Title" id="task-title"  required />
-                <textarea placeholder="Task Description" id="task-desc"></textarea>
-                <input type="date" id="due-date" required />
-                <select id="priority" required>
-                    <option value="" disabled selected>Select Priority</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-                <select id="project" required>
-                    <option value="" disabled selected>Select Project</option>
-                    <option value="development">Development</option>
-                    <option value="design">Design</option>
-                    <option value="marketing">Marketing</option>
-                </select>
-                <select id="task-department" required>
-                    <option value="" disabled selected>Select Department</option>
-                    <option value="hr">HR</option>
-                    <option value="it">IT</option>
-                    <option value="finance">Finance</option>
-                    <option value="sales">Sales</option>
-                </select>
-                <select id="assignee" required>
-                    <option value="" disabled selected>Assign To</option>
-                    <option value="User 1">User 1</option>
-                    <option value="User 2">User 2</option>
-                    <option value="User 3">User 3</option>
-                </select>
-                <button id="submit-btn" type="submit" class="bg-blue-500 px-4 py-2 text-white font-semi-bold hover:bg-blue-700 rounded-lg transition">Add Task</button>
-            </form>
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h2 class="text-2xl font-bold mb-6 text-blue-700 text-center">Add New Task</h2>
+                <form id="task-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <input type="text" placeholder="Task Title" id="task-title" class="border rounded px-3 py-2" required />
+                    <textarea placeholder="Task Description" id="task-desc" class="border rounded px-3 py-2 md:col-span-2 lg:col-span-1" required></textarea>
+                    <input type="date" id="due-date" class="border rounded px-3 py-2" required />
+                    <select id="priority" class="border rounded px-3 py-2" required>
+                        <option value="" disabled selected>Select Priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    <select id="project" class="border rounded px-3 py-2" required>
+                        <option value="" disabled selected>Select Project</option>
+                        <option value="development">Development</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                    </select>
+                    <select id="task-department" class="border rounded px-3 py-2" required>
+                        <option value="" disabled selected>Select Department</option>
+                        <option value="hr">HR</option>
+                        <option value="it">IT</option>
+                        <option value="finance">Finance</option>
+                        <option value="sales">Sales</option>
+                    </select>
+                    <select id="assignee" class="border rounded px-3 py-2" required>
+                        <option value="" disabled selected>Assign To</option>
+                        <option value="User 1">User 1</option>
+                        <option value="User 2">User 2</option>
+                        <option value="User 3">User 3</option>
+                    </select>
+                    <button id="submit-btn" type="submit" class="bg-blue-500 px-4 py-2 text-white font-semibold hover:bg-blue-700 rounded-lg transition col-span-1 md:col-span-2 lg:col-span-3 mt-2">
+                        Add Task
+                    </button>
+                </form>
+            </div>
         </section>
 
-        <!-- Task List -->
-        <section id="task-list" class="p-6 bg-gray-100 rounded-lg shadow-md mt-6">
+        <!-- Task List Card -->
+        <section id="task-list" class="bg-white rounded-lg shadow-lg p-8">
             <h2 class="font-bold text-2xl mb-4 text-center text-gray-800">Task List</h2>
-            <div id="task-container" class="flex jutify-center"></div>
+            <div id="task-container" class="overflow-x-auto"></div>
         </section>
-    </div>
-
-    
+    </main>
 
     <script src="script.js"></script>
 </body>
