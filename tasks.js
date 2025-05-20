@@ -1,3 +1,32 @@
+const dropdownBtn = document.getElementById("department-dropdown-btn");
+const dropdownMenu = document.getElementById("department-dropdown");
+const taskContainer = document.getElementById("task-container");
+
+// Toggle dropdown menu visibility
+dropdownBtn.addEventListener("click", () => {
+  dropdownMenu.classList.toggle("hidden");
+});
+
+// Filter tasks based on department
+dropdownMenu.addEventListener("click", (event) => {
+  if (event.target && event.target.tagName === "LI") {
+    const selectedDepartment = event.target.getAttribute("data-department");
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const filteredTasks = storedTasks.filter(
+      (task) =>
+        task.department.toLowerCase() === selectedDepartment.toLowerCase()
+    );
+
+    // Save filtered tasks to localStorage for the new page
+    localStorage.setItem("filteredTasks", JSON.stringify(filteredTasks));
+    
+
+    // Navigate to the new page with the department name as a query parameter
+    window.location.href = `tasks.html?department=${encodeURIComponent(
+      selectedDepartment
+    )}`;
+  }
+});
 function renderFilteredTasks() {
     const taskContainer = document.getElementById("task-container");
     if (!taskContainer) {
@@ -78,4 +107,4 @@ function updateURL(department){
     history.pushState({},'', newurl);
     window.dispatchEvent(new Event('popstate')); // Trigger renderFilteredTasks
 
-} 
+}

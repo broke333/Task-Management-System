@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="output.css">
 </head>
 <body>
+    <!-- navigation -->
+    <nav class="bg-black text-white px-4 py-2">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+                                    <h1 class="text-5xl font-bold text-center tracking-wide">Task Management System</h1>
+
+            <div class="relative">
+                <button id="department-dropdown-btn" class="text-white font-semibold px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-700 transition">
+                    Departments
+                </button>
+                <ul id="department-dropdown" class="hidden absolute right-0 bg-white text-black mt-2 rounded-lg shadow-lg w-40 z-10">
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="HR">HR</li>
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="IT">IT</li>
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Finance">Finance</li>
+                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-department="Sales">Sales</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-start">
         <h1 class="text-3xl font-bold text-gray-800 mt-8 mb-4">Tasks by Department</h1>
         <div id="task-container" class="p-4 w-full max-w-5xl"></div>
